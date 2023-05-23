@@ -1,40 +1,36 @@
 module.exports = (sequelize, DataTypes) => {
-  const Doctor = sequelize.define("doctors", {
+  const PatientDocuments = sequelize.define("patient documents", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    name: {
+    snils: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    surname: {
+    document_type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    middlename: {
+    ovd: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    pass_series: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lpu: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    speciality: {
+    pass_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    department: {
+    pass_date: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   });
 
-  return Doctor;
+  return PatientDocuments;
 }
