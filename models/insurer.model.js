@@ -1,32 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
-  const Patient = sequelize.define("patients", {
+  const Insurer = sequelize.define("insurer", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    name: {
+    area: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    surname: {
+    policy_series: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    middlename: {
+    policy_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    birthDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    sex: {
-      type: DataTypes.CHAR,
-      allowNull: false,
-    }
   });
 
-  return Patient;
+  return Insurer;
 }

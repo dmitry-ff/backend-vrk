@@ -22,5 +22,13 @@ db.Appointment = require("./appointment.model")(db.sequelize, DataTypes);
 db.Appointment = require("./card.model")(db.sequelize, DataTypes);
 db.Appointment = require("./doctor.model")(db.sequelize, DataTypes);
 db.Appointment = require("./patient.model")(db.sequelize, DataTypes);
+db.Appointment = require("./contacts.model")(db.sequelize, DataTypes);
+db.Appointment = require("./dispensaryRegistration.model")(db.sequelize, DataTypes);
+db.Appointment = require("./insurer.model")(db.sequelize, DataTypes);
+db.Appointment = require("./patientDocuments.model")(db.sequelize, DataTypes);
+db.Appointment = require("./privileges.model")(db.sequelize, DataTypes);
+db.Appointment = require("./registration.model")(db.sequelize, DataTypes);
+db.Appointment = require("./workPlace.model")(db.sequelize, DataTypes);
+
 
 module.exports = db;
