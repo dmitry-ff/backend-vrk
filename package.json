@@ -1,0 +1,24 @@
+{
+  "name": "backend-vkr",
+  "version": "1.0.0",
+  "description": "Repository with backend logic of vkr project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon node index.js"
+  },
+  "keywords": [
+    "backend",
+    "node",
+    "mysql"
+  ],
+  "author": "Dmitry Kozlov",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "mysql2": "^3.3.2",
+    "sequelize": "^6.31.1"
+  }
+}
