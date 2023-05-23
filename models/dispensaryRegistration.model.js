@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
     },
-    area: {
+    dispensary_registration_area: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    connection_date: {
+    dispensary_registration_connection_date: {
       type: DataTypes.DATE,
       allowNull: true,
     },

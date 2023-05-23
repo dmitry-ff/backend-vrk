@@ -6,23 +6,23 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
     },
-    phone_number: {
+    contacts_phone_number: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    comments: {
+    contacts_comments: {
       type: DataTypes.DATE,
       allowNull: true,
     },
-    area_category: {
+    contacts_area_category: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    social_category: {
+    contacts_social_category: {
       type: DataTypes.DATE,
       allowNull: true,
     },
-    social_status: {
+    contacts_social_status: {
       type: DataTypes.STRING,
       allowNull: true,
     },
