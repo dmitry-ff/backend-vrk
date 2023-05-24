@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 const start = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({force: true});
+    await sequelize.sync({force: false});
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     })

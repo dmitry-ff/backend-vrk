@@ -1,4 +1,4 @@
-const {Card} = require("../models");
+const {Card, Patient} = require("../models");
 
 exports.addCard = function(req, res) {
   if(!req.body) {
@@ -18,40 +18,43 @@ exports.addCard = function(req, res) {
     })
 }
 
-exports.getCards = function(req, res) {
+exports.getCards = async function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Card.findAll((req.body))
-    .then((data) => {
-      res.send(data)
+  try {
+    const cards = await Card.findAll({include: Patient});
+    res.send(cards);
+  } catch(err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while create the Card"
     })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occured while create the Card"
-      })
-    })
+  }
 }
 
-exports.getCard = function(req, res) {
+exports.getCard = async function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Card.findByPk(req.params.id)
-  .then((data) => {
-    res.send(data)
-  })
-  .catch((err) => {
+  try {
+    const card = await Card.findByPk(req.params.id);
+    const patient = await card.getPatient();
+    const row = {
+      card,
+      patient
+    }
+    res.send(row);
+  } catch(err) {
     res.status(500).send({
       message: err.message || "Some error occured while update the Card"
     })
-  })
+  }
 }
 
 exports.updateCard = function(req, res) {
