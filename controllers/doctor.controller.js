@@ -1,4 +1,5 @@
 const {Doctor} = require("../models");
+const bcrypt = require("bcrypt");
 
 exports.addDoctor = function(req, res) {
   if(!req.body) {
@@ -16,6 +17,19 @@ exports.addDoctor = function(req, res) {
         message: err.message || "Some error occured while create the Doctor"
       })
     })
+}
+
+exports.registration = async function(req, res, next) {
+  const {login, password} = req.body;
+  if(!login || !password) {
+    return;
+  }
+  const candidate = await Doctor.findOne({where: {login}});
+  if(candidate) {
+    return;
+  }
+  const hashPassword = await bcrypt(password, 5)
+  const user = await Doctor.create({})
 }
 
 exports.updateDoctor = function(req, res) {
