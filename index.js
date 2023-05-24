@@ -5,6 +5,10 @@ const cors = require("cors");
 const sequelize  = require("./db");
 const modles = require("./models");
 const doctorRouter = require("./routes/doctor.router");
+const cardRouter = require("./routes/card.router");
+const outpatientExaminationRouter = require("./routes/outpatientExamination.router");
+const appointmentRouter = require("./routes/appointment.router");
+const patientRouter = require("./routes/patient.router");
 
 const PORT = process.env.PORT || 8081;
 
@@ -19,6 +23,10 @@ app.use(express.json()) //парсит запросы с заголовком co
 app.use(express.urlencoded({extended: false})); //парсит запросы с загловком content-type - application/x-www/form-urlencoded
 
 app.use("/doctors", doctorRouter);
+app.use("/cards", cardRouter);
+app.use("/outpatientExamination", outpatientExaminationRouter);
+app.use("/appointment", appointmentRouter);
+app.use("/patient", patientRouter);
 
 app.use((req, res, next) => {
   res.status(404).send("Not Found234234234");
