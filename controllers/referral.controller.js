@@ -1,13 +1,13 @@
-const {Patient} = require("../models");
+const {Referral} = require("../models");
 
-exports.getPatients = function(req, res) {
+exports.addReferral = function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Patient.findAll()
+  Referral.create(req.body)
     .then((data) => {
       res.send(data)
     })
@@ -18,14 +18,14 @@ exports.getPatients = function(req, res) {
     })
 }
 
-exports.getPatient = function(req, res) {
+exports.updateReferral = function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Patient.findByPk(req.params.id)
+  Referral.update(req.body, {where: {id: req.params.id}})
     .then((data) => {
       res.send(data)
     })
@@ -36,14 +36,14 @@ exports.getPatient = function(req, res) {
     })
 }
 
-exports.addPatient = function(req, res) {
+exports.getReferrals = function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Patient.create(req.body)
+  Referral.findAll()
     .then((data) => {
       res.send(data)
     })
@@ -54,34 +54,32 @@ exports.addPatient = function(req, res) {
     })
 }
 
-exports.updatePatient = function(req, res) {
+exports.getReferral = function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Patient.update(req.body, {where: {id: req.params.id}})
-  .then((data) => {
-    res.send(data)
-  })
-  .catch((err) => {
-    res.status(500).send({
-      message: err.message || "Some error occured while create the OutpatientExamination"
+  Referral.findByPk(req.params.id)
+    .then((data) => {
+      res.send(data)
     })
-  })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occured while create the OutpatientExamination"
+      })
+    })
 }
 
-exports.deletePatient = function(req, res) {
+exports.deleteRefferal = function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Patient.destroy({
-    where: {id: req.params.id}
-  })
+  Referral.destroy(req.params.id)
     .then((data) => {
       res.send(data)
     })
