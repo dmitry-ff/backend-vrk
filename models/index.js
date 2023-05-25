@@ -329,7 +329,44 @@ const StageEpicrisis = sequelize.define("stage epicrisis", {
   },
 })
 
-//TODO: houseCall model needs to be completed
+const Coupon = sequelize.define("coupon", {
+  id: {
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    type: DataTypes.INTEGER,
+  },
+})
+
+const HouseCall = sequelize.define("house calls", {
+  id: {
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true,
+    type: DataTypes.INTEGER,
+  },
+  adress: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  reason: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  }
+})
+
+// TODO: fix relations if it has intermediate table
+Patient.hasMany(HouseCall);
+HouseCall.belongsTo(Patient);
+
+Doctor.hasMany(HouseCall);
+HouseCall.belongsTo(Doctor);
+
+Patient.hasMany(Coupon);
+Coupon.belongsTo(Patient);
+
+Doctor.hasMany(Coupon);
+Coupon.belongsTo(Doctor);
 
 Patient.hasMany(Appointment);
 Appointment.belongsTo(Patient);
@@ -356,4 +393,6 @@ module.exports = {
   OutpatientExamination,
   Patient,
   Referral,
+  HouseCall,
+  Coupon
 }
