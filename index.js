@@ -9,12 +9,12 @@ const cardRouter = require("./routes/card.router");
 const outpatientExaminationRouter = require("./routes/outpatientExamination.router");
 const appointmentRouter = require("./routes/appointment.router");
 const patientRouter = require("./routes/patient.router");
-const errorHandler = require("./middleware/ErrorHendelingMiddleware");
+const errorHandler = require("./middleware/ErrorHandlingMiddleware");
 
 const PORT = process.env.PORT || 8081;
 
 const corsOptions = {
-  origin: `http://localhost:${PORT}`
+  origin: `http://localhost:3000`
 }
 
 const app = express();

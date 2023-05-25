@@ -50,7 +50,7 @@ const Card = sequelize.define("card", {
     allowNull: true,
   },
   contacts_social_category: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   contacts_social_status: {

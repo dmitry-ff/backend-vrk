@@ -44,6 +44,12 @@ exports.getCard = async function(req, res) {
   }
   try {
     const card = await Card.findByPk(req.params.id);
+    if(!card) {
+      res.status(404).send({
+        message: "Такого нет"
+      })
+      return;
+    }
     const patient = await card.getPatient();
     const row = {
       card,
