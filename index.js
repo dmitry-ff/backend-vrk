@@ -9,6 +9,7 @@ const cardRouter = require("./routes/card.router");
 const outpatientExaminationRouter = require("./routes/outpatientExamination.router");
 const appointmentRouter = require("./routes/appointment.router");
 const patientRouter = require("./routes/patient.router");
+const errorHandler = require("./middleware/ErrorHendelingMiddleware");
 
 const PORT = process.env.PORT || 8081;
 
@@ -28,6 +29,7 @@ app.use("/outpatientExamination", outpatientExaminationRouter);
 app.use("/appointment", appointmentRouter);
 app.use("/patient", patientRouter);
 
+app.use(errorHandler);
 app.use((req, res, next) => {
   res.status(404).send("Not Found234234234");
 })
