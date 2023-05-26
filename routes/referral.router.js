@@ -7,6 +7,6 @@ referralRouter.get("/", referralController.getReferrals);
 referralRouter.get("/:id", referralController.getReferral);
 referralRouter.post("/create", referralController.addReferral);
 referralRouter.put("/update/:id", referralController.updateReferral);
-referralRouter.delete("/delete/:id", referralController.deleteReferral);
+referralRouter.delete("/delete/:id", referralController.deleteRefferal);
 
 module.exports = referralRouter;
