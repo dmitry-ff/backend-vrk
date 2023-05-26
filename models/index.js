@@ -50,7 +50,7 @@ const Card = sequelize.define("card", {
     allowNull: true,
   },
   contacts_social_category: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: true,
   },
   contacts_social_status: {
@@ -379,6 +379,9 @@ Card.belongsTo(Patient);
 
 Doctor.hasMany(OutpatientExamination);
 OutpatientExamination.belongsTo(Doctor);
+
+Patient.hasMany(Referral, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+Referral.belongsTo(Patient, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
 
 Referral.hasOne(OutpatientExamination);
 OutpatientExamination.belongsTo(Referral);

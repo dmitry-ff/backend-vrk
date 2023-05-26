@@ -1,4 +1,4 @@
-const {Referral} = require("../models");
+const {Referral, Patient} = require("../models");
 
 exports.addReferral = function(req, res) {
   if(!req.body) {
@@ -43,7 +43,7 @@ exports.getReferrals = function(req, res) {
     });
     return;
   }
-  Referral.findAll()
+  Referral.findAll({include: Patient})
     .then((data) => {
       res.send(data)
     })
