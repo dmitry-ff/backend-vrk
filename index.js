@@ -10,6 +10,7 @@ const outpatientExaminationRouter = require("./routes/outpatientExamination.rout
 const appointmentRouter = require("./routes/appointment.router");
 const patientRouter = require("./routes/patient.router");
 const referralRouter = require("./routes/referral.router");
+const houseCallRouter = require("./routes/houseCalls.router");
 const errorHandler = require("./middleware/ErrorHandlingMiddleware");
 
 const PORT = process.env.PORT || 8081;
@@ -30,6 +31,7 @@ app.use("/outpatientExamination", outpatientExaminationRouter);
 app.use("/appointments", appointmentRouter);
 app.use("/patient", patientRouter);
 app.use("/referrals", referralRouter);
+app.use("/houseCalls", houseCallRouter)
 
 app.use(errorHandler);
 app.use((req, res, next) => {
@@ -39,7 +41,7 @@ app.use((req, res, next) => {
 const start = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({force: true});
+    await sequelize.sync({force: false});
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     })

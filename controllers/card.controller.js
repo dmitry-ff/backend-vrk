@@ -17,7 +17,22 @@ exports.addCard = function(req, res) {
       })
     })
 }
-
+exports.getPatientCards = async function(req, res) {
+  if(!req.body) {
+    res.status(400).send({
+      message: "Contetn can not be empty!",
+    });
+    return;
+  }
+  try {
+    const cards = await Card.findAll({where: {patientId: req.params.id}})
+    res.send(cards);
+  } catch(err) {
+    res.status(500).send({
+      message: err.message || "Some error occured while create the Card"
+    })
+  }
+}
 exports.getCards = async function(req, res) {
   if(!req.body) {
     res.status(400).send({

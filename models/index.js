@@ -351,8 +351,8 @@ const HouseCall = sequelize.define("house calls", {
 Patient.hasMany(HouseCall);
 HouseCall.belongsTo(Patient);
 
-Doctor.hasMany(HouseCall);
-HouseCall.belongsTo(Doctor);
+Doctor.hasMany(HouseCall, {foreignKey: {allowNull: false}});
+HouseCall.belongsTo(Doctor, {foreignKey: {allowNull: false}});
 
 Patient.hasMany(Coupon);
 Coupon.belongsTo(Patient);
@@ -363,7 +363,7 @@ Coupon.belongsTo(Doctor);
 Patient.hasMany(Appointment, {foreignKey: {allowNull: false}});
 Appointment.belongsTo(Patient, {foreignKey: {allowNull: false}});
 
-Doctor.hasMany(Appointment, {foreignKey: {allowNull: false}});
+Doctor.hasMany(Appointment);
 Appointment.belongsTo(Doctor, {foreignKey: {allowNull: false}});
 
 Patient.hasMany(Card);
