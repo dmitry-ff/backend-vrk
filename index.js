@@ -27,7 +27,7 @@ app.use(express.urlencoded({extended: false})); //парсит запросы с
 app.use("/doctors", doctorRouter);
 app.use("/cards", cardRouter);
 app.use("/outpatientExamination", outpatientExaminationRouter);
-app.use("/appointment", appointmentRouter);
+app.use("/appointments", appointmentRouter);
 app.use("/patient", patientRouter);
 app.use("/referrals", referralRouter);
 
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 const start = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({force: false});
+    await sequelize.sync({force: true});
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     })

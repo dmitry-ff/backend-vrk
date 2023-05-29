@@ -1,4 +1,4 @@
-const {Appointment} = require("../models");
+const {Appointment, Patient} = require("../models");
 
 exports.getAppointments = function(req, res) {
   if(!req.body) {
@@ -7,9 +7,12 @@ exports.getAppointments = function(req, res) {
     });
     return;
   }
-  Appointment.findAll()
+  Appointment.findAll({include: Patient})
     .then((data) => {
-      res.send(data)
+      return data.map((item) => item.dataValues)
+    })
+    .then((data) => {
+      res.send(data.filter((item) => (new Date(item.appointmentDate).toDateString() === new Date().toDateString())));
     })
     .catch((err) => {
       res.status(500).send({

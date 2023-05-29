@@ -8,14 +8,6 @@ const Appointment = sequelize.define("appointments", {
     allowNull: false,
     autoIncrement: true,
   },
-  patientName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  patientBirthDate: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
   appointmentDate: {
     type: DataTypes.DATE,
     allowNull: false,
@@ -368,11 +360,11 @@ Coupon.belongsTo(Patient);
 Doctor.hasMany(Coupon);
 Coupon.belongsTo(Doctor);
 
-Patient.hasMany(Appointment);
-Appointment.belongsTo(Patient);
+Patient.hasMany(Appointment, {foreignKey: {allowNull: false}});
+Appointment.belongsTo(Patient, {foreignKey: {allowNull: false}});
 
-Doctor.hasMany(Appointment);
-Appointment.belongsTo(Doctor);
+Doctor.hasMany(Appointment, {foreignKey: {allowNull: false}});
+Appointment.belongsTo(Doctor, {foreignKey: {allowNull: false}});
 
 Patient.hasMany(Card);
 Card.belongsTo(Patient);
