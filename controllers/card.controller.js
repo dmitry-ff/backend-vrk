@@ -25,8 +25,8 @@ exports.getPatientCards = async function(req, res) {
     return;
   }
   try {
-    const cards = await Card.findAll({where: {patientId: req.params.id}})
-    res.send(cards);
+    const cards = await Card.findAll({where: {patientId: req.params.id}, include: Patient, attributes: [], },)
+    res.send(cards.map((item) => ({...item.patient.dataValues})));
   } catch(err) {
     res.status(500).send({
       message: err.message || "Some error occured while create the Card"
