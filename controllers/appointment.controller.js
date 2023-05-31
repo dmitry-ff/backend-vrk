@@ -9,10 +9,7 @@ exports.getAppointments = function(req, res) {
   }
   Appointment.findAll({include: Patient})
     .then((data) => {
-      return data.map((item) => item.dataValues)
-    })
-    .then((data) => {
-      res.send(data.filter((item) => (new Date(item.appointmentDate).toDateString() === new Date().toDateString())));
+      res.send(data.map((item) => item.dataValues))
     })
     .catch((err) => {
       res.status(500).send({

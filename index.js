@@ -16,7 +16,7 @@ const errorHandler = require("./middleware/ErrorHandlingMiddleware");
 const PORT = process.env.PORT || 8081;
 
 const corsOptions = {
-  origin: `http://localhost:3000`
+  origin: `http://localhost:3001`
 }
 
 const app = express();
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 const start = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({force: true});
+    await sequelize.sync({force: false});
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     })

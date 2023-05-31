@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const { Doctor } = require("../models");
 
-module.exports = function(req, res, next) {
+module.exports = async function(req, res, next) {
   if(req.method === "OPTIONS") {
     next();
   }
@@ -12,6 +13,10 @@ module.exports = function(req, res, next) {
     }
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const isDoctorExists = await Doctor.findOne({where: {login: decoded.login}})
+    if(!isDoctorExists) {
+      return res.status(401).json({message: "Не авторизован"});
+    }
     req.doctor = decoded;
     
     next();
