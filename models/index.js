@@ -286,10 +286,13 @@ const Referral = sequelize.define("referral", {
   id: {
     primaryKey: true,
     allowNull: false,
-    autoIncrement: true,
-    type: DataTypes.INTEGER,
+    type: DataTypes.CHAR,
   },
-  reason: {
+  date: {
+    allowNull: false,
+    type: DataTypes.DATE,
+  },
+  diagnoz: {
     allowNull: false,
     type: DataTypes.STRING,
   },
@@ -372,14 +375,14 @@ Card.belongsTo(Patient);
 Doctor.hasMany(OutpatientExamination);
 OutpatientExamination.belongsTo(Doctor);
 
-Patient.hasMany(Referral, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-Referral.belongsTo(Patient, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
+Patient.hasMany(Referral, { foreignKey: { allowNull: false } });
+Referral.belongsTo(Patient, { foreignKey: { allowNull: false } });
 
 Referral.hasOne(OutpatientExamination);
 OutpatientExamination.belongsTo(Referral);
 
-Doctor.hasMany(Referral);
-Referral.belongsTo(Doctor);
+Doctor.hasMany(Referral, {foreignKey: {allowNull: false}});
+Referral.belongsTo(Doctor, {foreignKey: {allowNull: false}});
 
 module.exports = {
   Appointment,
