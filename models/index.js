@@ -200,7 +200,7 @@ const Doctor = sequelize.define("doctors", {
   },
 });
 
-const OutpatientExamination = sequelize.define("outpatient examination", {
+const Inspection = sequelize.define("inspection", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -208,49 +208,54 @@ const OutpatientExamination = sequelize.define("outpatient examination", {
     autoIncrement: true,
   },
   date: {
-    type: DataTypes.DATE,
-    allowNull: false,
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   lpu: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   type: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   department: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   complaints: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   anamnesis: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   objectively: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   spec_status: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   treatment_plan: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   survey_plan: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   recomendations: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
+  status: {
+    type: DataTypes.CHAR,
+    allowNull: true,
+    defaultValue: "0"
+  }
 });
 
 const Patient = sequelize.define("patients", {
@@ -286,7 +291,11 @@ const Referral = sequelize.define("referral", {
   id: {
     primaryKey: true,
     allowNull: false,
-    type: DataTypes.CHAR,
+    autoIncrement: true,
+    type: DataTypes.INTEGER,
+  },
+  diagnoz_code: {
+    allowNull: false, type: DataTypes.STRING,
   },
   date: {
     allowNull: false,
@@ -372,14 +381,14 @@ Appointment.belongsTo(Doctor, {foreignKey: {allowNull: false}});
 Patient.hasMany(Card);
 Card.belongsTo(Patient);
 
-Doctor.hasMany(OutpatientExamination);
-OutpatientExamination.belongsTo(Doctor);
+Doctor.hasMany(Inspection);
+Inspection.belongsTo(Doctor);
 
-Patient.hasMany(Referral, { foreignKey: { allowNull: false } });
+Patient.hasMany(Referral);
 Referral.belongsTo(Patient, { foreignKey: { allowNull: false } });
 
-Referral.hasOne(OutpatientExamination);
-OutpatientExamination.belongsTo(Referral);
+Referral.hasOne(Inspection);
+Inspection.belongsTo(Referral);
 
 Doctor.hasMany(Referral, {foreignKey: {allowNull: false}});
 Referral.belongsTo(Doctor, {foreignKey: {allowNull: false}});
@@ -388,7 +397,7 @@ module.exports = {
   Appointment,
   Card,
   Doctor,
-  OutpatientExamination,
+  Inspection,
   Patient,
   Referral,
   HouseCall,

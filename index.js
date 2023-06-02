@@ -6,7 +6,7 @@ const sequelize  = require("./db");
 const modles = require("./models");
 const doctorRouter = require("./routes/doctor.router");
 const cardRouter = require("./routes/card.router");
-const outpatientExaminationRouter = require("./routes/outpatientExamination.router");
+const inspectionRouter = require("./routes/inspection.router");
 const appointmentRouter = require("./routes/appointment.router");
 const patientRouter = require("./routes/patient.router");
 const referralRouter = require("./routes/referral.router");
@@ -16,7 +16,7 @@ const errorHandler = require("./middleware/ErrorHandlingMiddleware");
 const PORT = process.env.PORT || 8081;
 
 const corsOptions = {
-  origin: `http://localhost:3001`
+  origin: `http://localhost:3000`
 }
 
 const app = express();
@@ -27,7 +27,7 @@ app.use(express.urlencoded({extended: false})); //парсит запросы с
 
 app.use("/doctors", doctorRouter);
 app.use("/cards", cardRouter);
-app.use("/outpatientExamination", outpatientExaminationRouter);
+app.use("/inspection", inspectionRouter);
 app.use("/appointments", appointmentRouter);
 app.use("/patient", patientRouter);
 app.use("/referrals", referralRouter);

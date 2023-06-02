@@ -1,21 +1,20 @@
-const {Referral, Patient} = require("../models");
+const {Referral, Patient, Inspection} = require("../models");
 
-exports.addReferral = function(req, res) {
+exports.addReferral = async function(req, res) {
   if(!req.body) {
     res.status(400).send({
       message: "Contetn can not be empty!",
     });
     return;
   }
-  Referral.create(req.body)
-    .then((data) => {
-      res.send(data)
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occured while create the OutpatientExamination"
-      })
-    })
+  try {
+    const ref = await Referral.create(req.body);
+    await ref.createInspection();
+    res.send(ref);
+  } catch (err) {
+    res.status(500).send({
+    message: err.message || "Some error occured while create the OutpatientExamination"})
+  }
 }
 
 exports.updateReferral = function(req, res) {
